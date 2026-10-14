@@ -1,0 +1,23 @@
+
+# Python environment
+.venv/
+.venv313/
+__pycache__/
+*.py[cod]
+
+# Secrets and environment variables
+.env
+.env.*
+!.env.example
+
+# Database and personal data
+*.db
+*.sqlite
+*.sqlite3
+
+# Editor and operating system files
+.vscode/
+.DS_Store
+Thumbs.db
+expenses.db
+sxpenses_backup_before_auth.db

@@ -1,0 +1,397 @@
+/* Personal Expense Tracker — minimal dark + orange theme
+   Replace the contents of your existing style.css with this file. */
+
+:root {
+  color-scheme: dark;
+  --bg: #0c0d0f;
+  --surface: #15171a;
+  --surface-2: #1c1f23;
+  --surface-3: #24272c;
+  --text: #f4f4f5;
+  --muted: #a0a4ab;
+  --border: #2b2f35;
+  --accent: #ff8a3d;
+  --accent-hover: #f47725;
+  --accent-soft: rgba(255, 138, 61, 0.13);
+  --success: #55d6a2;
+  --danger: #ff727f;
+  --radius: 16px;
+}
+
+* { box-sizing: border-box; }
+
+html {
+  min-height: 100%;
+  background: var(--bg);
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  padding: 30px 22px 42px;
+  background:
+    radial-gradient(ellipse at 12% 0%, rgba(255, 138, 61, 0.07), transparent 34%),
+    var(--bg);
+  color: var(--text);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.container {
+  width: min(1120px, 100%);
+  margin: 0 auto;
+}
+
+/* Header */
+#trackerSection > header {
+  display: block;
+  margin: 0 0 26px;
+}
+
+#trackerSection > header h1 {
+  margin: 0 0 6px;
+  font-size: clamp(27px, 4vw, 35px);
+  line-height: 1.15;
+  letter-spacing: -1.1px;
+  font-weight: 720;
+}
+
+#trackerSection > header p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+/* Keep logout quiet and aligned to the right */
+#logoutButton {
+  display: block;
+  margin: 0 0 18px auto;
+  padding: 8px 13px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: transparent;
+  color: #d7d9dd;
+  font-size: 12px;
+  font-weight: 600;
+}
+#logoutButton:hover:not(:disabled) {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: none;
+}
+
+/* Simple two-column desktop layout: form/summary on left, chart/history on right */
+.dashboard {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.85fr) minmax(0, 1.15fr);
+  gap: 18px;
+  align-items: start;
+}
+.dashboard > div {
+  grid-column: 1;
+  grid-row: 1 / span 2;
+  min-width: 0;
+}
+#monthlyAnalysis {  min-height: 18px;
+  margin-bottom: 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+/* Transaction table */
+.table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  border-radius: 10px;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+th, td {
+  padding: 12px 9px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: middle;
+}
+th {
+  color: #9298a1;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+}
+td {
+  color: #e8e9eb;
+  font-size: 12px;
+}
+td:last-child, th:last-child { text-align: right; }
+tbody tr:last-child td { border-bottom: 0; }
+tbody tr:hover { background: rgba(255, 255, 255, 0.025); }
+.empty-message {
+  padding: 26px 10px;
+  color: var(--muted);
+  text-align: center;
+  white-space: normal;
+}
+
+/* Row actions */
+.action-button {
+  width: auto;
+  min-height: 32px;
+  margin: 0 3px 3px 0;
+  padding: 7px 9px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  font-size: 11px;
+}
+/* .edit-button {
+  background: #e7d8ce;
+    color: #8b4e25;
+    border: 1px solid #f1ece8;
+}
+
+.delete-button {
+   background: #302025;
+    color: #cfafb3;
+    border: 1px solid #e4d7d7;
+} */
+
+.action-button:hover { opacity: 0.88; }
+
+/* Feedback and footer */
+.status {
+  min-height: 20px;
+  margin: 12px 0 0;
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+.status.success { color: var(--success); }
+.status.error { color: var(--danger); }
+
+#trackerSection footer {
+  margin: 20px 0 0;
+  color: #737983;
+  font-size: 11px;
+  text-align: center;
+}
+
+/* Login/register page — same theme, separate from dashboard */
+#authSection {
+  display: none;
+  width: min(410px, calc(100% - 24px));
+  margin: 8vh auto;
+  padding: 30px;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background: var(--surface);
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.28);
+}
+#authSection h2 {
+  margin: 0 0 8px;
+  color: var(--text);
+  font-size: 26px;
+  letter-spacing: -0.7px;
+}
+#authSection p {
+  color: var(--muted);
+  font-size: 13px;
+}
+#authSection #authSwitch {
+  margin-top: 6px;
+  padding: 7px 9px;
+  background: transparent;
+  color: var(--accent);
+}
+#authSection #authSwitch:hover:not(:disabled) { color: #ffb27f; }
+#authSection #authStatus { overflow-wrap: anywhere; }
+#trackerSection { display: none; }
+
+/* Tablet/mobile: one clean vertical column, no overlapping grid placement */
+@media (max-width: 820px) {
+  body { padding: 22px 14px 30px; }
+  .dashboard { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .dashboard > div,
+  #monthlyAnalysis,
+  .dashboard > section.card:not(#monthlyAnalysis) {
+    grid-column: 1;
+    grid-row: auto;
+  }
+  #trackerSection .card { padding: 19px; margin-bottom: 14px; }
+  #trackerSection > header { margin-bottom: 21px; }
+  #trackerSection .summary { min-height: 135px; }
+}
+
+/* ===== Recent Expenses: Minimal Transaction List ===== */
+
+#trackerSection .table-wrapper {
+    overflow-x: auto;
+    border-radius: 12px;
+}
+
+#trackerSection table {
+    border-collapse: separate;
+    border-spacing: 0;
+    width: 100%;
+}
+
+#trackerSection th {
+    padding: 13px 10px;
+    color: #858b95;
+    font-size: 10px;
+    letter-spacing: 1px;
+    border-bottom: 1px solid #303238;
+}
+
+#trackerSection td {
+    padding: 16px 10px;
+    color: #e7e8eb;
+    font-size: 12px;
+    border-bottom: 1px solid #292c31;
+    vertical-align: middle;
+}
+
+#trackerSection tbody tr:last-child td {
+    border-bottom: none;
+}
+
+#trackerSection tbody tr {
+    transition: background 0.18s ease;
+}
+
+#trackerSection tbody tr:hover {
+    background: #1c1f23;
+}
+
+/* Expense description */
+#trackerSection tbody td:first-child {
+    color: #ffffff;
+    font-weight: 600;
+}
+
+/* Amount */
+#trackerSection tbody td:nth-child(3) {
+    color: #ffb27f;
+    font-weight: 650;
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+}
+
+/* Keep action buttons neatly aligned */
+#trackerSection tbody td:last-child {
+    white-space: nowrap;
+    text-align: right;
+}
+
+#trackerSection .action-button {
+    padding: 7px 10px;
+    min-height: 32px;
+    border-radius: 8px;
+    font-size: 11px;
+    font-weight: 650;
+}
+
+@media (max-width: 480px) {
+    #trackerSection td {
+        padding: 13px 8px;
+    }
+
+    #trackerSection .action-button {
+        padding: 7px 8px;
+    }
+}
+
+/* Edit — muted blue */
+#trackerSection .edit-button {
+    background: #1e3449;
+    color: #8ecbff;
+    border: 1px solid #31516c;
+}
+
+#trackerSection .edit-button:hover {
+    background: #294762;
+    border-color: #5daeff;
+}
+
+/* Delete — soft coral red */
+#trackerSection .delete-button {
+    background: #3a2227;
+    color: #ff9da5;
+    border: 1px solid #65353c;
+}
+
+#trackerSection .delete-button:hover {
+    background: #512b32;
+    border-color: #ff727f;
+}
+
+/* ===== Compact Total Card ===== */
+
+#trackerSection .summary {
+    min-height: 0;
+    padding: 16px 18px;
+    margin-bottom: 14px;
+    border-left: 3px solid #78816b;
+    border-radius: 12px;
+}
+
+#trackerSection .summary p {
+    margin-bottom: 6px;
+    font-size: 12px;
+}
+
+#trackerSection .summary h2 {
+    font-size: 26px;
+    line-height: 1.2;
+    letter-spacing: -0.5px;
+}
+
+/* ===== Compact Add Expense Form ===== */
+
+#trackerSection .dashboard > div > section.card:not(.summary) {
+    padding: 18px;
+    margin-bottom: 14px;
+    border-radius: 12px;
+}
+
+#trackerSection .dashboard > div > section.card:not(.summary) h2 {
+    margin-bottom: 12px;
+    font-size: 16px;
+}
+
+#expenseForm label {
+    margin: 12px 0 6px;
+    font-size: 12px;
+}
+
+#expenseForm input,
+#expenseForm select {
+    min-height: 40px;
+    padding: 9px 11px;
+    font-size: 13px;
+    border-radius: 8px;
+}
+
+#expenseForm .primary-button {
+    min-height: 42px;
+    margin-top: 17px;
+    padding: 10px 14px;
+    font-size: 13px;
+    border-radius: 8px;
+}
+
+/* Tighter spacing on mobile */
+@media (max-width: 480px) {
+    #trackerSection .summary {
+        padding: 15px 16px;
+    }
+
+    #trackerSection .summary h2 {
+        font-size: 24px;
+    }
+
+    #trackerSection .dashboard > div > section.card:not(.summary) {
+        padding: 16px;
+    }
+}
