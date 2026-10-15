@@ -7,6 +7,10 @@ __pycache__/
 
 # Secrets and environment variables
 .env
+env.txt
+main_backup.py
+main_sqlite_old.py
+migrate_to_postgres.py
 .env.*
 !.env.example
 
