@@ -796,7 +796,7 @@ body:has(#authSection[style*="display: block"]) {
 
   <!-- JavaScript: Connects the webpage to the Python API -->
   <script>
-    const API_URL = "http://127.0.0.1:8000/api/expenses";
+    const API_URL = "https://personal-expense-tracker-czyy.onrender.com";
     let editingExpenseId = null;
 
     const form = document.getElementById("expenseForm");
@@ -1210,8 +1210,8 @@ authForm.addEventListener("submit", async function(event) {
 
     try {
         const endpoint = isRegisterMode
-            ? "http://127.0.0.1:8000/api/register"
-            : "http://127.0.0.1:8000/api/login";
+            ? "https://personal-expense-tracker-czyy.onrender.com/api/register"
+            : "https://personal-expense-tracker-czyy.onrender.com/api/login";
 
         const response = await fetch(endpoint, {
             method: "POST",
