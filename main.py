@@ -321,16 +321,16 @@ def debug_database():
         "columns": [column["name"] for column in columns],
         "table_definition": table["sql"] if table else None
     }
-@app.get("/debug/expense-ownership")
-def debug_expense_ownership():
-    with get_connection() as connection:
-        rows = connection.execute("""
-            SELECT id, description, user_id
-            FROM expenses
-            ORDER BY id
-        """).fetchall()
+# @app.get("/debug/expense-ownership")
+# def debug_expense_ownership():
+#     with get_connection() as connection:
+#         rows = connection.execute("""
+#             SELECT id, description, user_id
+#             FROM expenses
+#             ORDER BY id
+#         """).fetchall()
 
-    return [dict(row) for row in rows]
+#     return [dict(row) for row in rows]
     
 @app.delete("/api/expenses/{expense_id}")
 def delete_expense(
@@ -404,14 +404,14 @@ def update_expense(
     return dict(row)   
 # assign_existing_expenses("test@example.com") 
 
-@app.get("/debug/users")
-def debug_users():
-    with get_connection() as connection:
-        rows = connection.execute(
-            "SELECT id, email FROM users"
-        ).fetchall()
+# @app.get("/debug/users")
+# def debug_users():
+#     with get_connection() as connection:
+#         rows = connection.execute(
+#             "SELECT id, email FROM users"
+#         ).fetchall()
 
-    return [dict(row) for row in rows]
+#     return [dict(row) for row in rows]
 # if __name__ == "__main__":
 #     with get_connection() as connection:
 #         print("Database file:", DATABASE)
