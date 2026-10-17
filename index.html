@@ -796,7 +796,7 @@ body:has(#authSection[style*="display: block"]) {
 
   <!-- JavaScript: Connects the webpage to the Python API -->
   <script>
-    const API_URL = "https://personal-expense-tracker-czyy.onrender.com";
+    const API_URL = "https://personal-expense-tracker-czyy.onrender.com/api/expenses";
     let editingExpenseId = null;
 
     const form = document.getElementById("expenseForm");
@@ -1087,9 +1087,10 @@ function renderMonthlyAnalysis(expenses) {
 
     try {
         const response = await fetch(
-            isEditing
-                ? `${API_URL}/api/expenses/${editingExpenseId}`
-                : `${API_URL}/api/expenses`,
+            // isEditing
+            //     ? `${API_URL}/api/expenses/${editingExpenseId}`
+            //     : `${API_URL}/api/expenses`,
+            isEditing ? `${API_URL}/${editingExpenseId}` : API_URL,
             {
                 method: isEditing ? "PUT" : "POST",
                 headers: {
