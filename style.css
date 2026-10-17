@@ -395,3 +395,31 @@ tbody tr:hover { background: rgba(255, 255, 255, 0.025); }
         padding: 16px;
     }
 }
+
+/* Expense History: fixed height with internal scrolling */
+#expenseHistory {
+    max-height: 350px;
+    overflow-y: auto;
+    overflow-x: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #777 #1c1c22;
+}
+
+/* Keep table headings visible while scrolling */
+#expenseHistory thead th {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    background: #1c1c22;
+}
+
+/* Optional: make the scrollbar visible in Chrome */
+#expenseHistory::-webkit-scrollbar {
+    width: 7px;
+    height: 7px;
+}
+
+#expenseHistory::-webkit-scrollbar-thumb {
+    background: #777;
+    border-radius: 10px;
+}
