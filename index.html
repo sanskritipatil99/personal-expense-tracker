@@ -1088,8 +1088,8 @@ function renderMonthlyAnalysis(expenses) {
     try {
         const response = await fetch(
             isEditing
-                ? `${API_URL}/${editingExpenseId}`
-                : API_URL,
+                ? `${API_URL}/api/expenses/${editingExpenseId}`
+                : `${API_URL}/api/expenses`,
             {
                 method: isEditing ? "PUT" : "POST",
                 headers: {
