@@ -174,7 +174,7 @@
 
     footer {
       color: #718078;
-      font-size: 12px;
+      font-size: 14px;
       text-align: center;
       margin-top: 12px;
     }
@@ -613,7 +613,7 @@ body:has(#authSection[style*="display: block"]) {
 
 <body>
   
-<section class="card" id="authSection">
+<section class="card" id="authSection">  
   <h2 id="authTitle">Welcome back</h2>
   <p id="authDescription">Sign in to access your expenses.</p>
 
@@ -657,15 +657,14 @@ body:has(#authSection[style*="display: block"]) {
       Create an account
     </button>
   </p>
+  <p id="authDescription" style="color: orange"> Gratitude is the easiest, fastest way to change your life.</p>
 </section>
 
   <main class="container" id="trackerSection">
-    <button id="logoutButton" type="button">Logout</button>
     <header>
       <h1>My Expense Tracker</h1>
       <p>Understand your spending, one expense at a time.</p>
     </header>
-
     <section class="dashboard">
 
       <!-- Left side: Add expense form and summary -->
@@ -764,7 +763,7 @@ body:has(#authSection[style*="display: block"]) {
       <section class="card">
         <h2>Recent expenses</h2>
 
-        <div class="table-wrapper">
+        <div class="table-wrapper" id="expenseHistory">
           <table>
             <thead>
               <tr>
@@ -787,12 +786,13 @@ body:has(#authSection[style*="display: block"]) {
       </section>
 
     </section>
-
+    <button id="logoutButton" type="button">Logout</button>
     <footer>
-      Your expenses are stored in your local SQLite database.
+      Know that the Universe has unlimited ways to bring money to you. Unlimited!
     </footer>
 
-  </main>
+  
+</main>
 
   <!-- JavaScript: Connects the webpage to the Python API -->
   <script>
