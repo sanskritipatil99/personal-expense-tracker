@@ -4,7 +4,7 @@
 <head>
   <link rel="stylesheet" href="style.css">
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
   <title>Personal Expense Tracker</title>
 
@@ -18,7 +18,7 @@
       margin: 0;
       padding: 30px 16px;
       font-family: Arial, sans-serif;
-      background: #f4f7f6;
+      background: #0d0e0d;
       color: #24332e;
     }
 
@@ -239,16 +239,6 @@
     border-radius: 8px;
     font-size: 14px;
 }
-
-/* .edit-button {
-    background: #41e973;
-    color: #FFFFFF;
-}
-
-.delete-button {
-    background: #D8273F;
-    color: #FFFFFF;
-} */
 
 .action-button:hover {
     opacity: 0.9;
@@ -605,6 +595,50 @@ body:has(#authSection[style*="display: block"]) {
 }
 
 
+.top-actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  width: 100%;
+  margin: 16px 0;
+}
+
+.top-actions button {
+  width: 100%;
+  min-width: 0;
+  min-height: 48px;
+  padding: 12px 8px;
+  border: none;
+  border-radius: 12px;
+  background: #6828d9;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 650;
+}
+
+#incomeCard,
+#expenseCard {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 0 16px;
+}
+
+#incomeCard button,
+#expenseCard button {
+  min-height: 44px;
+}
+
+@media (max-width: 360px) {
+  .top-actions {
+    gap: 8px;
+  }
+
+  .top-actions button {
+    padding: 10px 5px;
+    font-size: 12px;
+  }
+}
+
   </style>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -657,24 +691,87 @@ body:has(#authSection[style*="display: block"]) {
       Create an account
     </button>
   </p>
-  <p id="authDescription" style="color: orange"> Gratitude is the easiest, fastest way to change your life.</p>
+  <p id="authDescription" style="color:orange">Dream Lofty dreams, and as you dream, so you shall become.</p>
 </section>
+    
+<div id="moneyAnimation" class="money-animation" aria-hidden="true"></div>
 
   <main class="container" id="trackerSection">
     <header>
-      <h1>My Expense Tracker</h1>
-      <p>Understand your spending, one expense at a time.</p>
+      <h1 style="color: #fcfaff;">My Expense Tracker</h1>
     </header>
-    <section class="dashboard">
+    <!---Income Card block-->
+    
+<div class="top-actions">
+  <button type="button" id="toggleIncomeButton">
+    + Add Income
+  </button>
+ <button type="button" id="toggleExpenseButton">
+    + Add Expense
+  </button>
+</div>
 
-      <!-- Left side: Add expense form and summary -->
+<section class="card" id="incomeCard" style="display: none;">
+  <h3>Add Income</h3>
+
+  <form id="incomeForm">
+    <label for="incomeSource">Income Source</label>
+    <input
+      type="text"
+      id="incomeSource"
+      placeholder="e.g. Salary, Freelance, Bonus"
+      maxlength="50"
+      required
+    />
+
+    <label for="incomeMonth">Month</label>
+    <input type="month" id="incomeMonth" required />
+
+    <label for="incomeAmount">Amount (₹)</label>
+    <input
+      type="number"
+      id="incomeAmount"
+      min="0.01"
+      step="0.01"
+      placeholder="Enter amount"
+      required
+    />
+
+    <button type="submit" id="saveIncomeButton">Save Income</button>
+    <button type="button" id="cancelIncomeButton">Cancel</button>
+
+    <p id="incomeStatus" role="status"></p>
+  </form>
+</section>
+
+    <!--End of Income card-->
+    <!-- <section class="dashboard">
+
+       Left side: Add expense form and summary 
       <div>
         <section class="card summary">
           <p>Total expenses recorded</p>
-          <h2 id="total">₹0.00</h2>
-        </section>
+          <h2 id="total">₹0.00</h2> 
+  <p id="summaryMonth">Monthly Summary</p>
 
-        <section class="card">
+  <div class="summary-item">
+    <p>Total Income</p>
+    <h2 id="totalIncome">₹0.00</h2>
+  </div>
+
+  <div class="summary-item">
+    <p>Total Expenses</p>
+    <h2 id="total">₹0.00</h2>
+  </div>
+
+  <div class="summary-item balance-item">
+    <p>Month Balance</p>
+    <h2 id="monthBalance">₹0.00</h2>
+  </div>
+</section>
+        </section> -->
+
+        <section class="card" id="expenseCard" style="display: none;">
           <h2>Add an expense</h2>
 
           <form id="expenseForm">
@@ -711,15 +808,16 @@ body:has(#authSection[style*="display: block"]) {
             <label for="category">Category</label>
             <select id="category" name="category">
               <option value="None">None</option>
-              <option value="Food">Food</option>
-              <option value="Transport">Transport</option>
-              <option value="Shopping">Shopping</option>
-              <option value="Bills">Bills</option>
-              <option value="Health">Health</option>
-              <option value="Other">Other</option>
-              <option value="Savings">Savings</option>
-              <option value="Entertainment">Entertainment</option>
-              
+              <option value="Groceries">Groceries 🛒</option>
+              <option value="Transport">Transport 🚗</option>
+              <option value="Shopping">Shopping 🛍️</option>
+              <option value="Bills">Bills 💳</option>
+              <option value="Health">Health 🏥</option>
+              <option value="Other">Other 🎯</option>
+              <option value="Savings">Savings 🐖</option>
+              <option value="Entertainment">Entertainment 🎬</option>
+              <option value="Investments">Investments 💼</option>
+              <option value="Home & Utilities">Home & Utilities 🏠</option>
             </select>
 
             <button
@@ -727,11 +825,12 @@ body:has(#authSection[style*="display: block"]) {
               class="primary-button"
               type="submit"
             >
-              Add Expense
+              CHA-CHING!
             </button>
 
             <p id="status" class="status" role="status"
                aria-live="polite"></p>
+            <button type="button" id="cancelExpenseButton">Cancel</button>
           </form>
         </section>
       </div>
@@ -739,7 +838,10 @@ body:has(#authSection[style*="display: block"]) {
       
 <section class="card" id="monthlyAnalysis">
   <h2>Monthly Spending Analysis</h2>
-
+ <div class="monthly-summary-values">
+  <p>Money In : <strong id="totalIncome">  ₹0.00</strong></p>
+  <p>Remaining : <strong id="monthBalance">  ₹0.00</strong></p>
+</div>
   <label for="analysisMonth">Select month</label>
   <input
     type="month"
@@ -748,13 +850,16 @@ body:has(#authSection[style*="display: block"]) {
   >
 
   <p>
-    Total for selected month:
+    Money out :
     <strong id="monthlyTotal">₹0.00</strong>
   </p>
 
   <div style="max-width: 400px; margin: 0 auto;">
     <canvas id="categoryChart"></canvas>
   </div>
+  
+
+
 
   <p id="chartMessage" role="status" aria-live="polite"></p>
 </section>
@@ -801,9 +906,137 @@ body:has(#authSection[style*="display: block"]) {
 
     const form = document.getElementById("expenseForm");
     const expenseList = document.getElementById("expenseList");
-    const totalDisplay = document.getElementById("total");
+    const totalDisplay = document.getElementById("monthlyTotal");
     const statusDisplay = document.getElementById("status");
     const submitButton = document.getElementById("submitButton");
+
+    <!-- Function to calculate Income card -->
+    
+const incomeCard = document.getElementById("incomeCard");
+const incomeForm = document.getElementById("incomeForm");
+const incomeStatus = document.getElementById("incomeStatus");
+const incomeButton = document.getElementById("toggleIncomeButton");
+
+const incomeApiUrl = API_URL.replace(
+  /\/api\/expenses\/?$/,
+  "/api/monthly-income"
+);
+
+incomeButton.addEventListener("click", () => {
+  const isHidden = incomeCard.style.display === "none";
+  incomeCard.style.display = isHidden ? "block" : "none";
+  incomeButton.textContent = isHidden
+    ? "− Close Income Form"
+    : "+ Add Income";
+
+  if (isHidden) {
+    document.getElementById("incomeMonth").value =
+      new Date().toISOString().slice(0, 7);
+  }
+  expenseCard.style.display = "none";
+  expenseButton.textContent = "+ Add Expense";
+});
+
+const expenseCard = document.getElementById("expenseCard");
+const expenseButton = document.getElementById("toggleExpenseButton");
+const cancelExpenseButton = document.getElementById("cancelExpenseButton");
+
+expenseButton.addEventListener("click", () => {
+  const isHidden = expenseCard.style.display === "none";
+
+  expenseCard.style.display = isHidden ? "block" : "none";
+  expenseButton.textContent = isHidden
+    ? "− Close Expense"
+    : "+ Add Expense";
+
+  // Close the income form when opening the expense form.
+  if (isHidden) {
+    incomeCard.style.display = "none";
+    incomeButton.textContent = "+ Add Income";
+
+    if (!editingExpenseId) {
+      form.reset();
+      submitButton.textContent = "Add Expense";
+      statusDisplay.textContent = "";
+    }
+
+    document.getElementById("expenseDate").value =
+      new Date().toLocaleDateString("en-CA");
+  }
+});
+
+cancelExpenseButton.addEventListener("click", () => {
+  form.reset();
+  editingExpenseId = null;
+  submitButton.textContent = "Add Expense";
+  statusDisplay.textContent = "";
+
+  expenseCard.style.display = "none";
+  expenseButton.textContent = "+ Add Expense";
+});
+
+document.getElementById("cancelIncomeButton").addEventListener("click", () => {
+  incomeForm.reset();
+  incomeStatus.textContent = "";
+  incomeCard.style.display = "none";
+  incomeButton.textContent = "+ Add Income";
+});
+
+incomeForm.addEventListener("submit", async (event) => {
+  event.preventDefault();
+
+  const source = document.getElementById("incomeSource").value.trim();
+  const month = document.getElementById("incomeMonth").value;
+  const amount = Number(
+    document.getElementById("incomeAmount").value
+  );
+  const saveButton = document.getElementById("saveIncomeButton");
+
+  if (!source || !month || !Number.isFinite(amount) || amount <= 0) {
+    incomeStatus.textContent = "Enter a source, month, and valid amount.";
+    return;
+  }
+
+  if (!accessToken) {
+    incomeStatus.textContent = "Please log in first.";
+    return;
+  }
+
+  saveButton.disabled = true;
+  incomeStatus.textContent = "Saving income...";
+
+  try {
+    const response = await fetch(incomeApiUrl, {
+      method: "PUT",
+      headers: {
+        "Authorization": `Bearer ${accessToken}`,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        income_month: `${month}-01`,
+        source: source,
+        amount: amount
+      })
+    });
+
+    const data = await response.json().catch(() => ({}));
+
+    if (!response.ok) {
+      throw new Error(data.detail || "Failed to save income.");
+    }
+
+    incomeStatus.textContent = "Income saved successfully!";
+    incomeForm.reset();
+    document.getElementById("incomeMonth").value = month;
+    await loadMonthlySummary();
+  } catch (error) {
+    incomeStatus.textContent = error.message;
+  } finally {
+    saveButton.disabled = false;
+  }
+});
+
+    <!-- end of income functions-->
 
     function showStatus(message, type) {
       statusDisplay.textContent = message;
@@ -891,7 +1124,7 @@ total += Number(expense.amount);
         totalDisplay.textContent =
           "₹" + total.toFixed(2);
         renderMonthlyAnalysis(expenses);
-
+        
       } catch (error) {
         console.error("Loading error:", error);
 
@@ -912,6 +1145,7 @@ total += Number(expense.amount);
           "error"
         );
       }
+      await loadMonthlySummary();
     }
 
     <!--Start Monthly chat code-->
@@ -1027,6 +1261,111 @@ function renderMonthlyAnalysis(expenses) {
         }
     });
 }
+
+async function loadMonthlySummary() {
+    const month = document.getElementById("analysisMonth").value;
+    if (!month || !accessToken) return;
+
+    const apiBase = API_URL.replace(/\/api\/expenses\/?$/, "");
+
+    try {
+        const response = await fetch(
+            `${apiBase}/api/monthly-summary?month=${month}-01`,
+            {
+                headers: {
+                    Authorization: `Bearer ${accessToken}`
+                }
+            }
+        );
+
+        if (!response.ok) {
+            throw new Error(`Summary request failed: ${response.status}`);
+        }
+
+        const data = await response.json();
+
+        document.getElementById("totalIncome").textContent =
+            `₹${Number(data.total_income).toLocaleString("en-IN", {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            })}`;
+
+        document.getElementById("monthlyTotal").textContent =
+            `₹${Number(data.total_expenses).toLocaleString("en-IN", {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            })}`;
+
+        document.getElementById("monthBalance").textContent =
+            `₹${Number(data.month_balance).toLocaleString("en-IN", {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            })}`;
+
+    } catch (error) {
+        console.error("Failed to load monthly summary:", error);
+    }
+}
+
+// async function loadMonthlySummary() {
+//     const monthInput = document.getElementById("analysisMonth");
+//     const selectedMonth = monthInput.value;
+
+//     if (!selectedMonth || !accessToken) return;
+
+//     const summaryMonth = document.getElementById("summaryMonth");
+//     const incomeDisplay = document.getElementById("totalIncome");
+//     const expenseDisplay = document.getElementById("total");
+//     const balanceDisplay = document.getElementById("monthBalance");
+
+//     try {
+//         const response = await fetch(
+//             `${API_URL.replace(/\/api\/expenses\/?$/, "")}/api/monthly-summary?month=${selectedMonth}-01`,
+//             {
+//                 headers: {
+//                     "Authorization": `Bearer ${accessToken}`
+//                 }
+//             }
+//         );
+
+//         if (!response.ok) {
+//             throw new Error("Could not load monthly summary.");
+//         }
+
+//         const data = await response.json();
+
+//         // incomeDisplay.textContent =
+//         //     "₹" + Number(data.total_income).toFixed(2);
+
+//         // expenseDisplay.textContent =
+//         //     "₹" + Number(data.total_expenses).toFixed(2);
+
+//         // balanceDisplay.textContent =
+//         //     "₹" + Number(data.month_balance).toFixed(2);
+//         document.getElementById("totalIncome").textContent =
+//     "₹" + Number(data.total_income).toFixed(2);
+
+// document.getElementById("total").textContent =
+//     "₹" + Number(data.total_expenses).toFixed(2);
+
+// document.getElementById("monthBalance").textContent =
+//     "₹" + Number(data.month_balance).toFixed(2);
+
+//         summaryMonth.textContent = new Date(
+//             `${selectedMonth}-01T12:00:00`
+//         ).toLocaleDateString("en-IN", {
+//             month: "long",
+//             year: "numeric"
+//         }) + " · Monthly Summary";
+
+//         balanceDisplay.style.color =
+//             Number(data.month_balance) < 0 ? "#ff7777" : "#75e0b1";
+
+//     } catch (error) {
+//         console.error("Monthly summary error:", error);
+//     }
+// }
+
     <!--End Monthly chat code-->
     document.getElementById("analysisMonth")
     .addEventListener("change", async function() {
@@ -1043,6 +1382,7 @@ function renderMonthlyAnalysis(expenses) {
 
             const expenses = await response.json();
             renderMonthlyAnalysis(expenses);
+            await loadMonthlySummary();
 
         } catch (error) {
             console.error("Monthly analysis error:", error);
@@ -1252,6 +1592,7 @@ authForm.addEventListener("submit", async function(event) {
         sessionStorage.setItem("accessToken", accessToken);
         showTrackerScreen();
         await loadExpenses();
+        await loadMonthlySummary();
 
     } catch (error) {
         authStatus.textContent = error.message;
@@ -1299,6 +1640,11 @@ async function deleteExpense(expenseId) {
 function editExpense(expense) {
     editingExpenseId = expense.id;
 
+    expenseCard.style.display = "block";
+    expenseButton.textContent = "− Close Expense";
+    incomeCard.style.display = "none";
+    incomeButton.textContent = "+ Add Income";
+
     document.getElementById("description").value =
         expense.description;
 
@@ -1323,6 +1669,7 @@ function editExpense(expense) {
 if (accessToken) {
     showTrackerScreen();
     loadExpenses();
+    loadMonthlySummary();
 } else {
     showAuthScreen();
 }
@@ -1336,7 +1683,7 @@ document.getElementById("logoutButton").addEventListener("click", () => {
 
     // Clear previous account's expense data
     document.getElementById("expenseList").innerHTML = "";
-    document.getElementById("total").textContent = "₹0.00";
+    document.getElementById("monthlyTotal").textContent = "₹0.00";
 
     // Clear login form and status
     authForm.reset();
