@@ -777,3 +777,32 @@ svg {
     }
 }
 
+/* iPhone Safari: fix date field overflow */
+#expenseCard,
+#expenseCard form,
+#expenseCard .form-group {
+    min-width: 0 !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+#expenseCard input[type="date"] {
+    display: block !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    padding: 10px !important;
+    margin: 0 0 12px !important;
+    font-size: 16px !important;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+#expenseCard input,
+#expenseCard select {
+    min-width: 0 !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+}
+
