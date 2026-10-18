@@ -778,15 +778,15 @@ svg {
 }
 
 /* iPhone Safari: fix date field overflow */
-#expenseCard,
-#expenseCard form,
+#expenseCard,#monthlyAnalysis,
+#expenseCard form,#incomeCard,
 #expenseCard .form-group {
     min-width: 0 !important;
     max-width: 100% !important;
     box-sizing: border-box !important;
 }
 
-#expenseCard input[type="date"] {
+#expenseCard input[type="date"],#incomeCard input[type="date"],#incomeCard input[type="month"],#monthlyAnalysis input[type="month"]{
     display: block !important;
     width: 100% !important;
     min-width: 0 !important;
@@ -798,8 +798,7 @@ svg {
     -webkit-appearance: none;
     appearance: none;
 }
-
-#expenseCard input,
+#expenseCard input,#monthlyAnalysis,#incomeCard,
 #expenseCard select {
     min-width: 0 !important;
     max-width: 100% !important;
